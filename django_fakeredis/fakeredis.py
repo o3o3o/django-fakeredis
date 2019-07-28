@@ -1,6 +1,8 @@
 import os
 import fakeredis
-from unittest.mock import patch
+from django.core.cache import DefaultCacheProxy
+from unittest.mock import patch, _get_target, _importer
+
 from django.test import override_settings
 
 server = fakeredis.FakeServer()
@@ -32,7 +34,13 @@ class FakeRedis:
                     }
                 }
             )
-            self.patch = patch(self.path, get_fake_redis)
+            # Recheck path in mock lib
+            _get_target(path)
+            target = _importer(path)
+            if callable(target):
+                self.patch = patch(self.path, get_fake_redis)
+            else:
+                self.patch = patch(self.path, get_fake_redis())
 
     def __call__(self, fn):
         if not self.NOFAKE_REDIS:

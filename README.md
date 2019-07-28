@@ -55,3 +55,26 @@ from django_fakeredis.fakeredis import FakeRedis
 with FakeRedis("yourpath.get_redis_connection"):
     foo()
 ```
+
+```python
+from django_fakeredis.fakeredis import FakeRedis
+with FakeRedis("yourpath.cache"):
+    foo()
+```
+
+#### NOTE
+
+If you want to mock `django.core.cache.cache` with fakeredis, you should notice that there are internal cast in django cache.
+i.e:
+```
+from django.core.cache import cache
+cache.set("key", 2)
+assert cache.get("key") == 2
+```
+but if you use fakeredis, you have to cast by hand:
+```
+con.set("key", 2)
+concache.get("key").decode('utf8') == "2"
+```
+
+So I suggest to use [django_redis](https://github.com/niwinz/django-redis) with fakeredis in django.

@@ -3,5 +3,6 @@ __pycache__
 *.egg-info
 dist
 *.tox
-*.s[wop]
+*.sw[a-z]
 build
+
