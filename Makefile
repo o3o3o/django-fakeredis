@@ -1,6 +1,8 @@
+clean: 
+	rm dist/*
 test:
 	tox
-release:
+release: clean
 	@python setup.py sdist bdist_wheel
 	@twine upload dist/*
 
