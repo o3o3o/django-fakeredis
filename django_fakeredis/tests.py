@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django_fakeredis.fakeredis import FakeRedis
+from django_fakeredis import FakeRedis
 from django_redis import get_redis_connection
 
 from django.core.cache import cache

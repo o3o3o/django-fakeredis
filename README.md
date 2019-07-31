@@ -43,7 +43,7 @@ def test_sth():
 ### Usage
 ```python
 
-from django_fakeredis.fakeredis import FakeRedis
+from django_fakeredis import FakeRedis
 @FakeRedis("yourpath.get_redis_connection")
 def test_foo():
     ...
@@ -51,13 +51,13 @@ def test_foo():
 
 
 ```python
-from django_fakeredis.fakeredis import FakeRedis
+from django_fakeredis import FakeRedis
 with FakeRedis("yourpath.get_redis_connection"):
     foo()
 ```
 
 ```python
-from django_fakeredis.fakeredis import FakeRedis
+from django_fakeredis import FakeRedis
 with FakeRedis("yourpath.cache"):
     foo()
 ```
