@@ -1,9 +1,10 @@
-clean: 
-	rm dist/*
+clean:
+	rm -f dist/*
 test:
 	tox
-release: clean
+build: clean
 	@python setup.py sdist bdist_wheel
+release: build
 	@twine upload dist/*
 
 .PHONY: release

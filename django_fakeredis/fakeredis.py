@@ -27,10 +27,11 @@ class FakeRedis:
         self.patch = None
 
         if not self.NOFAKE_REDIS:
+            # We have to override CACHE settings for django_redis too
             self.override_settings = override_settings(
                 CACHES={
                     "default": {
-                        "BACKEND": "django.core.cache.backends.dummy.DummyCache"
+                        "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
                     }
                 }
             )
@@ -40,21 +41,31 @@ class FakeRedis:
             if callable(target):
                 self.patch = patch(self.path, get_fake_redis)
             else:
-                self.patch = patch(self.path, get_fake_redis())
+                # Here the mock target is django.cache
+                pass
 
     def __call__(self, fn):
         if not self.NOFAKE_REDIS:
             fn = self.override_settings(fn)
-            fn = self.patch(fn)
+            if self.patch:
+                fn = self.patch(fn)
 
         return fn
 
     def __enter__(self):
         if not self.NOFAKE_REDIS:
-            return self.override_settings.__enter__(), self.patch.__enter__()
-        return None, None
+            if self.override_settings and self.patch:
+                return self.override_settings.__enter__(), self.patch.__enter__()
+            elif self.override_settings:
+                return self.override_settings.__enter__()
+            elif self.patch:
+                return self.patch.__enter__()
+
+        return None
 
     def __exit__(self, *args, **kw):
         if not self.NOFAKE_REDIS:
-            self.override_settings.__exit__(*args, **kw)
-            self.patch.__exit__(*args, **kw)
+            if self.override_settings:
+                self.override_settings.__exit__(*args, **kw)
+            if self.patch:
+                self.patch.__exit__(*args, **kw)
