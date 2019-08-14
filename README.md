@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/o3o3o/django-fakeredis.svg?style=svg)](https://circleci.com/gh/o3o3o/django-fakeredis)
 
-More easier to use [fakeredis](https://pypi.org/project/fakeredis) in django.
+Easier use [fakeredis](https://pypi.org/project/fakeredis) in Django.
 
 
 ### Install
@@ -12,7 +12,7 @@ pip install django-fakeredis
 ## Why use it?
 
 I have experienced many times to find bugs which is caused by mutiple fakeredis instances in tests.
-We just want to use fakerredis like redis with one redis-server and different connections.
+We just want to use fakerredis like redis with one redis-server and different connections and can debug with MONITOR command in redis
 
 ### Features:
 

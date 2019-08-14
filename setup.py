@@ -4,8 +4,8 @@ install_requires = open("requirements.txt").read().splitlines()
 
 setup(
     name="django-fakeredis",
-    version="0.1.0",
-    description="More easier to use fakeredis in django.",
+    version="0.1.1",
+    description="Easier to use fakeredis in Django.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="o3o3o",
