@@ -1,6 +1,5 @@
 import os
 import fakeredis
-from django.core.cache import DefaultCacheProxy
 from unittest.mock import patch, _get_target, _importer
 
 from django.test import override_settings

@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/o3o3o/django-fakeredis.svg?style=svg)](https://circleci.com/gh/o3o3o/django-fakeredis)
+[![CircleCI](https://circleci.com/gh/o3o3o/django-fakeredis.svg?style=svg)](https://circleci.com/gh/o3o3o/django-fakeredis) [![PyPI](https://img.shields.io/pypi/v/django-fakeredis)](https://pypi.org/project/django-fakeredis/)
 
 Easier use [fakeredis](https://pypi.org/project/fakeredis) in Django.
 
